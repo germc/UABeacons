@@ -59,7 +59,7 @@
                                 <rect key="frame" x="245" y="433" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="goatDarSwitchTouched:" destination="vXZ-lx-hvc" eventType="valueChanged" id="jOp-gb-bw4"/>
+                                    <action selector="goatDarSwitchTouched:" destination="vXZ-lx-hvc" eventType="valueChanged" id="sYp-du-La5"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X,Y:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjh-Y4-1jF">

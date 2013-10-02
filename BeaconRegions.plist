@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>New item</key>
+<array>
 	<dict>
 		<key>title</key>
 		<string>Gary</string>
@@ -13,5 +12,15 @@
 		<key>Minor</key>
 		<string>2222</string>
 	</dict>
-</dict>
+	<dict>
+		<key>title</key>
+		<string>Bacon</string>
+		<key>proximityUUID</key>
+		<string>5A4BCFCE-174E-4BAC-A814-092E77F6B7E5</string>
+		<key>Major</key>
+		<string>1111</string>
+		<key>Minor</key>
+		<string>2222</string>
+	</dict>
+</array>
 </plist>

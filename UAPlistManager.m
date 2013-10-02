@@ -1,11 +1,7 @@
-
 #import "UAPlistManager.h"
 #import <CoreLocation/Corelocation.h>
 
 @implementation UAPlistManager {
-
-    NSArray *plistBeaconContentsArray;
-    NSArray *plistRegionContentsArray;
 
 }
 
@@ -16,15 +12,15 @@
     {
         // uuidgen should be used to generate UUIDs.
        
-        [self buildBeaconsDataFromPlist];
-        [self buildRegionsDataFromPlist];
+        _beaconRegions = [self buildBeaconsDataFromPlist];
+        _regions = [self buildRegionsDataFromPlist];
         
         
-        _supportedProximityUUIDs = @[[[NSUUID alloc] initWithUUIDString:@"5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFD"],
-                                     [[NSUUID alloc] initWithUUIDString:@"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"],
-                                      [[NSUUID alloc] initWithUUIDString:@"5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"],
-                                      [[NSUUID alloc] initWithUUIDString:@"74278BDA-B644-4520-8F0C-720EAF059935"],
-                                     [[NSUUID alloc] initWithUUIDString:@"9DEAD044-DD92-E366-7E2D-C53AC3381B27"]];
+//        _supportedProximityUUIDs = @[[[NSUUID alloc] initWithUUIDString:@"5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFD"],
+//                                     [[NSUUID alloc] initWithUUIDString:@"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"],
+//                                      [[NSUUID alloc] initWithUUIDString:@"5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"],
+//                                      [[NSUUID alloc] initWithUUIDString:@"74278BDA-B644-4520-8F0C-720EAF059935"],
+//                                     [[NSUUID alloc] initWithUUIDString:@"9DEAD044-DD92-E366-7E2D-C53AC3381B27"]];
         _defaultPower = @-59;
     }
     
@@ -54,10 +50,10 @@
 {
     
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"BeaconRegions" ofType:@"plist"];
-    plistBeaconContentsArray = [NSArray arrayWithContentsOfFile:plistPath];
+    self.plistBeaconContentsArray = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
     NSMutableArray *beacons = [NSMutableArray array];
-    for(NSDictionary *beaconDict in plistBeaconContentsArray)
+    for(NSDictionary *beaconDict in self.plistBeaconContentsArray)
     {
         CLBeaconRegion *beaconRegion = [self mapDictionaryToBeacon:beaconDict];
         [beacons addObject:beaconRegion];
@@ -69,10 +65,10 @@
 {
     
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Regions" ofType:@"plist"];
-    plistRegionContentsArray = [NSArray arrayWithContentsOfFile:plistPath];
+    _plistRegionContentsArray = [NSArray arrayWithContentsOfFile:plistPath];
     
     NSMutableArray *regions = [NSMutableArray array];
-    for(NSDictionary *regionDict in plistRegionContentsArray)
+    for(NSDictionary *regionDict in _plistRegionContentsArray)
     {
         CLRegion *region = [self mapDictionaryToRegion:regionDict];
         [regions addObject:region];
@@ -83,11 +79,11 @@
 - (CLBeaconRegion*)mapDictionaryToBeacon:(NSDictionary*)dictionary {
     NSString *title = [dictionary valueForKey:@"title"];
     
-    NSUUID *UUIDString = [[NSUUID alloc] initWithUUIDString:[dictionary valueForKey:@"UUID"]] ;
-    CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
-    CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
+    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:[dictionary valueForKey:@"proximityUUID"]] ;
+//    CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
+//    CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
     
-    return [[CLBeaconRegion alloc] initWithProximityUUID:UUIDString major:major minor:minor identifier:title];
+    return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID major:11 minor:22 identifier:title];
 }
 
 - (CLRegion*)mapDictionaryToRegion:(NSDictionary*)dictionary {

@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
+  /*
     //Urban Airship additions START
     // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
     // or set runtime properties here.
@@ -32,20 +32,23 @@
     
     // Call takeOff (which creates the UAirship singleton)
     [UAirship takeOff:config];
-    
-    // Request a custom set of notification types
+//    
+//    // Request a custom set of notification types
     [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
                                          UIRemoteNotificationTypeAlert |
                                          UIRemoteNotificationTypeNewsstandContentAvailability);
     [UAPush setDefaultPushEnabledValue:YES];
     [[UAPush shared] setPushEnabled:YES];
+   
+   //    [UALocationService locationServicesEnabled];
+   //    [UALocationService locationServiceAuthorized];
+   //    [UALocationService airshipLocationServiceEnabled];
+   
     //Urban Airship additions END
-
+*/
     
-    [UALocationService locationServicesEnabled];
-    [UALocationService locationServiceAuthorized];
-    [UALocationService airshipLocationServiceEnabled];
+
     
     // Override point for customization after application launch.
     return YES;

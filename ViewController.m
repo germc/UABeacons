@@ -157,10 +157,17 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     // Start ranging when the view appears.
-    [_rangedRegions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        CLBeaconRegion *region = obj;
-        [_locationManager startRangingBeaconsInRegion:region];
-    }];
+    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
+    {
+    [_locationManager startRangingBeaconsInRegion:beaconRegion];
+    }
+    
+//    [_rangedRegions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        CLBeaconRegion *region = obj;
+//        [_locationManager startRangingBeaconsInRegion:region];
+//    }];
+//    
+    
    
 }
 
@@ -190,12 +197,12 @@
     int goatX = 2 * 9.75;
     int goatY = 21 * 9.75;
     
-    [UALocationService locationServicesEnabled];
-    [UALocationService locationServiceAuthorized];
-    [UALocationService airshipLocationServiceEnabled];
+//    [UALocationService locationServicesEnabled];
+//    [UALocationService locationServiceAuthorized];
+//    [UALocationService airshipLocationServiceEnabled];
     
-    UALocationService *locationService = [[UAirship shared] locationService];
-    [locationService startReportingSignificantLocationChanges];
+//    UALocationService *locationService = [[UAirship shared] locationService];
+//    [locationService startReportingSignificantLocationChanges];
     
      [self.goat1 setHidden:YES];
      [self.goat2 setHidden:YES];
@@ -234,12 +241,13 @@
 
     
     // Populate the regions we will range once.
-    _rangedRegions = [NSMutableArray array];
-    [[UAPlistManager sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
-        NSUUID *uuid = (NSUUID *)uuidObj;
-        CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
-        [_rangedRegions addObject:region];
-    }];
+    _rangedRegions = [NSMutableArray arrayWithArray:[UAPlistManager sharedDefaults].plistBeaconContentsArray];
+
+//    [[UAPlistManager sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
+//        NSUUID *uuid = (NSUUID *)uuidObj;
+//        CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
+//        [_rangedRegions addObject:region];
+//    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -272,9 +280,9 @@
 
     [self getBeaconUUIDStrings:beacons];
     [self getBeaconProximities:beacons];
-    [self getXY];//updats goatX and goatY
+    //[self getXY];//updats goatX and goatY
 
-    [view updateViewWithX:goatX andY:goatY];//draws goatX and goatY on screen
+    //[view updateViewWithX:goatX andY:goatY];//draws goatX and goatY on screen
     
     if ([self.goatDarSwitch isOn]) {
  
