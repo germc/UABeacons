@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ALDefaults.h"
+#import "UAPlistManager.h"
 #import "UAPush.h"
 #import "UALocationService.h"
 #import "UAirship.h"
@@ -91,12 +91,6 @@
     
 
 }
-//-(void)getXY{
-//    
-//    
-//    [self.xyLabel setText:[NSString stringWithFormat:@"%.2f,%.2f", metersToSquares(goatX), metersToSquares(goatY)]];
-//    
-//}
 
 -(void)getXY{
     kiPadX; //dx
@@ -182,7 +176,7 @@
     
     // Populate the regions we will range once.
     _rangedRegions = [NSMutableArray array];
-    [[ALDefaults sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
+    [[UAPlistManager sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
         NSUUID *uuid = (NSUUID *)uuidObj;
         CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
         [_rangedRegions addObject:region];
@@ -241,7 +235,7 @@
     
     // Populate the regions we will range once.
     _rangedRegions = [NSMutableArray array];
-    [[ALDefaults sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
+    [[UAPlistManager sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
         NSUUID *uuid = (NSUUID *)uuidObj;
         CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
         [_rangedRegions addObject:region];

@@ -1,9 +1,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ALDefaults : NSObject
+@interface UAPlistManager : NSObject
 
-+ (ALDefaults *)sharedDefaults;
++ (UAPlistManager *)sharedDefaults;
 
 @property (nonatomic, copy, readonly) NSArray *supportedProximityUUIDs;
 
