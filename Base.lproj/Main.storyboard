@@ -19,10 +19,10 @@
             </objects>
             <point key="canvasLocation" x="-292" y="144"/>
         </scene>
-        <!--View Controller-->
+        <!--Goat Dar View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="GoatDarViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hZI-Hp-OEe"/>
                         <viewControllerLayoutGuide type="bottom" id="8XN-Ep-0m5"/>

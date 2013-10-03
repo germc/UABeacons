@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 David Crow. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "GoatDarViewController.h"
 #import "UAPlistManager.h"
 #import "UAPush.h"
 #import "UALocationService.h"
@@ -35,11 +35,11 @@
 #define inchesToMeters(a)    (a * 0.0254)
 #define metersToSquares(a)    ((a * 39.3701)/9.75)
 
-@interface ViewController ()
+@interface GoatDarViewController ()
 
 @end
 
-@implementation ViewController
+@implementation GoatDarViewController
 {
     NSMutableDictionary *_beacons;
     CLLocationManager *_locationManager;

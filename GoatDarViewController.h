@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate>
+@interface GoatDarViewController : UIViewController <CLLocationManagerDelegate>
 
 -(NSMutableArray *)getBeaconUUIDStrings:(NSArray *)beacons;
 
