@@ -117,6 +117,7 @@
 
 }
 
+
 //-(void)getXY{
 //    kiPadX; //dx
 //    kiPadY; //dy initialise coordinates somehow
@@ -161,33 +162,16 @@
     {
     [_locationManager startRangingBeaconsInRegion:beaconRegion];
     }
-    
-//    [_rangedRegions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        CLBeaconRegion *region = obj;
-//        [_locationManager startRangingBeaconsInRegion:region];
-//    }];
-//    
-    
    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     // Stop ranging when the view goes away.
-    [_rangedRegions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        CLBeaconRegion *region = obj;
-        [_locationManager stopRangingBeaconsInRegion:region];
-    }];
-    
-    self.title = @"Ranging";
-    
-    // Populate the regions we will range once.
-    _rangedRegions = [NSMutableArray array];
-    [[UAPlistManager sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
-        NSUUID *uuid = (NSUUID *)uuidObj;
-        CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
-        [_rangedRegions addObject:region];
-    }];
+    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
+    {
+        [_locationManager stopRangingBeaconsInRegion:beaconRegion];
+    }
 }
 
 - (void)viewDidLoad
@@ -237,17 +221,6 @@
     AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(adamUrl), &adam);
     AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(catUrl), &cat);
     loopCheck = 0;
-    //  audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: bleatUrl error: nil];
-
-    
-    // Populate the regions we will range once.
-    _rangedRegions = [NSMutableArray arrayWithArray:[UAPlistManager sharedDefaults].plistBeaconContentsArray];
-
-//    [[UAPlistManager sharedDefaults].supportedProximityUUIDs enumerateObjectsUsingBlock:^(id uuidObj, NSUInteger uuidIdx, BOOL *uuidStop) {
-//        NSUUID *uuid = (NSUUID *)uuidObj;
-//        CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
-//        [_rangedRegions addObject:region];
-//    }];
 }
 
 - (void)didReceiveMemoryWarning
