@@ -15,6 +15,7 @@
 #import <AVFoundation/AVAudioPlayer.h>
 #import "RadarView.h"
 #import "Math.h"
+#import "UABeaconManager.h"
 
 /*UA presentation room can be divided into 660 floor squares - each 19.5 inches across
  * to fit in a reasonable coordinate system on screen, this is at half scale, so each square is roughly
@@ -73,18 +74,18 @@
     return UUIDStrings;
 }
 
--(void)getBeaconProximities:(NSArray *)beacons{
+-(void)getBeaconProximities:(NSArray *)beacons inRegion:(CLBeaconRegion *)region{
     
     for (CLBeacon *beacon in beacons) {
         //Add the UUID string for each beacon
         if ([[beacon.proximityUUID UUIDString]  isEqual: @"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"]) {
             self.iPodProx = [beacon accuracy];
-            [self.iPodProxLabel setText:[NSString stringWithFormat:@"%.2fm", beacon.accuracy]];
+            [self.iPodProxLabel setText:[NSString stringWithFormat:@"%.2fm from region %@", beacon.accuracy, region.identifier]];
            
         }
         if ([[beacon.proximityUUID UUIDString]  isEqual: @"5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"]) {
             self.iPadProx = [beacon accuracy];
-            [self.iPadProxLabel setText:[NSString stringWithFormat:@"%.2fm", beacon.accuracy]];
+            [self.iPadProxLabel setText:[NSString stringWithFormat:@"%.2fm from region %@", beacon.accuracy, region.identifier]];
             
         }
     }
@@ -157,26 +158,34 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // Start ranging when the view appears.
-    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
-    {
-    [_locationManager startRangingBeaconsInRegion:beaconRegion];
-    }
+//    // Start ranging when the view appears.
+//    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
+//    {
+//    [_locationManager startRangingBeaconsInRegion:beaconRegion];
+//    }
    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    // Stop ranging when the view goes away.
-    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
-    {
-        [_locationManager stopRangingBeaconsInRegion:beaconRegion];
-    }
+//    // Stop ranging when the view goes away.
+//    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
+//    {
+//        [_locationManager stopRangingBeaconsInRegion:beaconRegion];
+//    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Init UABeaconManager
+    [UABeaconManager shared];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(managerDidRangeBeacons)
+     name:@"managerDidRangeBeacons"
+     object:nil];
     
     int goatX = 2 * 9.75;
     int goatY = 21 * 9.75;
@@ -202,11 +211,7 @@
     view = [[RadarView alloc]initWithFrame:CGRectMake(10, 100, 204.75, 331.5)];
     view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:view];
-
-    
-    // This location manager will be used to demonstrate how to range beacons.
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
+ 
     tagArray = [[NSMutableArray alloc]init];
     UUIDStrings = [[NSMutableArray alloc]init];
     
@@ -242,17 +247,13 @@
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
+- (void)managerDidRangeBeacons
 {
-    // CoreLocation will call this delegate method at 1 Hz with updated range information.
+    // UABeaconManager will call this delegate method at 1 Hz with updated range information.
     // Beacons will be categorized and displayed by proximity.
     
-    //    [[NSNotificationCenter defaultCenter]
-    //     postNotificationName:@"updateView"
-    //     object:self];
-
-    [self getBeaconUUIDStrings:beacons];
-    [self getBeaconProximities:beacons];
+    [self getBeaconUUIDStrings:[[UABeaconManager shared] rangedBeacons]];
+    [self getBeaconProximities:[[UABeaconManager shared] rangedBeacons] inRegion:[[UABeaconManager shared] currentRegion]];
     //[self getXY];//updats goatX and goatY
 
     //[view updateViewWithX:goatX andY:goatY];//draws goatX and goatY on screen
@@ -261,7 +262,7 @@
  
         
         
-        NSArray *immediateBeacons = [beacons filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityImmediate]];
+        NSArray *immediateBeacons = [[[UABeaconManager shared] rangedBeacons] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityImmediate]];
         if([immediateBeacons count]){
             [_beacons setObject:immediateBeacons forKey:[NSNumber numberWithInt:CLProximityImmediate]];
             //add all uuid strings to set as tags
@@ -278,10 +279,10 @@
             [self.goat3 setHidden:NO];
             [self.connected setHidden:NO];
             [self.disconnected setHidden:YES];
-            [tagArray addObjectsFromArray:[self prependStringsInArray:[self getBeaconUUIDStrings:beacons] withPrefix:tagToAdd]];
+            [tagArray addObjectsFromArray:[self prependStringsInArray:[self getBeaconUUIDStrings:[[UABeaconManager shared] rangedBeacons]] withPrefix:tagToAdd]];
         }
         
-        NSArray *nearBeacons = [beacons filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityNear]];
+        NSArray *nearBeacons = [[[UABeaconManager shared] rangedBeacons] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityNear]];
         
         if([nearBeacons count]){
             [_beacons setObject:nearBeacons forKey:[NSNumber numberWithInt:CLProximityNear]];
@@ -299,10 +300,10 @@
             [self.goat3 setHidden:YES];
             [self.connected setHidden:NO];
             [self.disconnected setHidden:YES];
-            [tagArray addObjectsFromArray:[self prependStringsInArray:[self getBeaconUUIDStrings:beacons] withPrefix:tagToAdd]];
+            [tagArray addObjectsFromArray:[self prependStringsInArray:[self getBeaconUUIDStrings:[[UABeaconManager shared] rangedBeacons]] withPrefix:tagToAdd]];
         }
         
-        NSArray *farBeacons = [beacons filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityFar]];
+        NSArray *farBeacons = [[[UABeaconManager shared] rangedBeacons] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityFar]];
         if([farBeacons count]){
             [_beacons setObject:farBeacons forKey:[NSNumber numberWithInt:CLProximityFar]];
             
@@ -320,10 +321,10 @@
             [self.goat3 setHidden:YES];
             [self.connected setHidden:NO];
             [self.disconnected setHidden:YES];
-            [tagArray addObjectsFromArray:[self prependStringsInArray:[self getBeaconUUIDStrings:beacons] withPrefix:tagToAdd]];
+            [tagArray addObjectsFromArray:[self prependStringsInArray:[self getBeaconUUIDStrings:[[UABeaconManager shared] rangedBeacons]] withPrefix:tagToAdd]];
         }
         
-        NSArray *unknownBeacons = [beacons filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityUnknown]];
+        NSArray *unknownBeacons = [[[UABeaconManager shared] rangedBeacons] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"proximity = %d", CLProximityUnknown]];
         if([unknownBeacons count]){
             [tagArray removeAllObjects];
             [self.goat1 setHidden:YES];

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UISwitch *goatDarSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *xyLabel;
 
+
 @property CGFloat iPodProx;
 @property CGFloat iPadProx;
 

@@ -4,9 +4,9 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>Gary</string>
+		<string>iPad</string>
 		<key>proximityUUID</key>
-		<string>E2C56DB5-DFFB-48D2-B060-D0F5A71096E0</string>
+		<string>5A4BCFCE-174E-4BAC-A814-092E77F6B7E5</string>
 		<key>Major</key>
 		<string>1111</string>
 		<key>Minor</key>
@@ -14,9 +14,9 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Bacon</string>
+		<string>GaryBeacon</string>
 		<key>proximityUUID</key>
-		<string>5A4BCFCE-174E-4BAC-A814-092E77F6B7E5</string>
+		<string>E2C56DB5-DFFB-48D2-B060-D0F5A71096E0</string>
 		<key>Major</key>
 		<string>1111</string>
 		<key>Minor</key>

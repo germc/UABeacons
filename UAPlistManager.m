@@ -38,9 +38,6 @@
     return instance;
 }
 
-
-
-
 - (NSUUID *)defaultProximityUUID
 {
     return [_supportedProximityUUIDs objectAtIndex:0];
@@ -77,13 +74,13 @@
 }
 
 - (CLBeaconRegion*)mapDictionaryToBeacon:(NSDictionary*)dictionary {
-    //NSString *title = [dictionary valueForKey:@"title"];
+    NSString *title = [dictionary valueForKey:@"title"];
     
     NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:[dictionary valueForKey:@"proximityUUID"]] ;
     //CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
     //CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
     
-    return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:[proximityUUID UUIDString]];
+    return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:title];
 }
 
 - (CLRegion*)mapDictionaryToRegion:(NSDictionary*)dictionary {
