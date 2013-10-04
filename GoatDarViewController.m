@@ -251,7 +251,7 @@
 {
     // UABeaconManager will call this delegate method at 1 Hz with updated range information.
     // Beacons will be categorized and displayed by proximity.
-    
+    NSLog(@"%@", [[UABeaconManager shared] monitoredBeaconRegions]);
     [self getBeaconUUIDStrings:[[UABeaconManager shared] rangedBeacons]];
     [self getBeaconProximities:[[UABeaconManager shared] rangedBeacons] inRegion:[[UABeaconManager shared] currentRegion]];
     //[self getXY];//updats goatX and goatY

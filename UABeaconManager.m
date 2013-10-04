@@ -19,7 +19,7 @@
     
     NSMutableDictionary *_beacons;
     CLLocationManager *_locationManager;
-    NSMutableArray *_rangedRegions;
+    //NSMutableArray *_rangedRegions;
     NSMutableArray *tagArray;
     CGFloat bleatTime;
     
@@ -64,6 +64,8 @@
     
     self.rangedBeacons = beacons;
     self.currentRegion = region;
+    //set ivar to init read-only property
+    _monitoredBeaconRegions = [manager rangedRegions];
     
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"managerDidRangeBeacons"

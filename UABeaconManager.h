@@ -21,8 +21,10 @@ return _sharedObject; \
 @interface UABeaconManager : NSObject <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) NSArray *rangedBeacons;
-@property (strong, nonatomic) NSArray *monitoredRegions;
+//The current beacons that are monitored, apple already used "monitoredRegions" so they chose "rangedRegions"
+@property (strong, nonatomic, readonly) NSSet *monitoredBeaconRegions;
 @property (strong, nonatomic) CLBeaconRegion *currentRegion;
+
 
 
 + (id)shared;
