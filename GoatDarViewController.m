@@ -179,7 +179,7 @@
 {
     [super viewDidLoad];
     //Init UABeaconManager
-    [UABeaconManager shared];
+
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self

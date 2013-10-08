@@ -19,67 +19,275 @@
             </objects>
             <point key="canvasLocation" x="-322" y="800"/>
         </scene>
-        <!--View Controller - Item-->
-        <scene sceneID="zM7-Hz-LsN">
-            <objects>
-                <viewController id="W8d-E9-Phi" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Qyf-ZF-pi3"/>
-                        <viewControllerLayoutGuide type="bottom" id="gto-yE-ZuP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CuT-Wu-7iD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="9Lv-J5-fAz"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ymh-oq-ZU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="679" y="1792"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3ef-NU-EyI">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="4EE-61-B96" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="3BB-Q6-Igf"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="get-0K-Prm">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="7Wz-3T-6ST" kind="relationship" relationship="viewControllers" id="F7g-u6-rsH"/>
-                        <segue destination="W8d-E9-Phi" kind="relationship" relationship="viewControllers" id="nbZ-7v-HRQ"/>
-                        <segue destination="wQX-bH-501" kind="relationship" relationship="viewControllers" id="KXV-3U-Eq8"/>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="yrO-i6-FtN"/>
+                        <segue destination="p54-Lv-3Do" kind="relationship" relationship="viewControllers" id="9Xt-az-Bpw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zrf-FB-H72" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="145" y="800"/>
         </scene>
-        <!--View Controller - Item 2-->
-        <scene sceneID="jSX-10-Aua">
+        <!--Achievements View Controller - Achievements-->
+        <scene sceneID="7xW-8h-8Qo">
             <objects>
-                <viewController id="7Wz-3T-6ST" sceneMemberID="viewController">
+                <viewController id="p54-Lv-3Do" customClass="AchievementsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8a7-AK-CA4"/>
-                        <viewControllerLayoutGuide type="bottom" id="2rS-OK-ydB"/>
+                        <viewControllerLayoutGuide type="top" id="O33-Vn-vnW"/>
+                        <viewControllerLayoutGuide type="bottom" id="udl-SG-hyz"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iMe-Cf-Kut">
+                    <view key="view" contentMode="scaleToFill" id="fxT-Re-lZ9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="RtV-FA-fTs">
+                                <rect key="frame" x="20" y="102" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="man-sitting.png" translatesAutoresizingMaskIntoConstraints="NO" id="xRE-g9-LMc">
+                                <rect key="frame" x="20" y="109" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKJ-bX-lwT">
+                                <rect key="frame" x="37" y="136" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="A0R-3b-rJh">
+                                <rect key="frame" x="216" y="102" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="no-meetings.png" translatesAutoresizingMaskIntoConstraints="NO" id="yrz-kc-EK0">
+                                <rect key="frame" x="230" y="123" width="63" height="62"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fo3-4g-RwP">
+                                <rect key="frame" x="233" y="136" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="xxJ-Q8-Bdf">
+                                <rect key="frame" x="118" y="102" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="402628484596.png" translatesAutoresizingMaskIntoConstraints="NO" id="gkI-qs-axQ">
+                                <rect key="frame" x="137" y="119" width="53" height="66"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcD-4W-2MP">
+                                <rect key="frame" x="135" y="136" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="0sq-ME-mwN">
+                                <rect key="frame" x="20" y="221" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bvi-qm-TlY">
+                                <rect key="frame" x="20" y="221" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6v-HY-B0V">
+                                <rect key="frame" x="37" y="255" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="TA2-rq-feb">
+                                <rect key="frame" x="118" y="221" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="jue-7F-lFC">
+                                <rect key="frame" x="118" y="221" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKO-9B-A4q">
+                                <rect key="frame" x="135" y="255" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="lbY-vk-7TC">
+                                <rect key="frame" x="216" y="221" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="8zV-zb-kyb">
+                                <rect key="frame" x="216" y="221" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owr-oi-jso">
+                                <rect key="frame" x="233" y="255" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-7X-rIE">
+                                <rect key="frame" x="20" y="319" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Pz-b8-5jW">
+                                <rect key="frame" x="20" y="319" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="MbY-Od-feo">
+                                <rect key="frame" x="118" y="319" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="dHw-he-inQ">
+                                <rect key="frame" x="118" y="319" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBe-zx-J08">
+                                <rect key="frame" x="135" y="353" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="2M6-tP-a6e">
+                                <rect key="frame" x="216" y="319" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="WBh-jh-2Oh">
+                                <rect key="frame" x="213" y="319" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vh-We-NAX">
+                                <rect key="frame" x="233" y="353" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="P2A-zW-ClJ">
+                                <rect key="frame" x="20" y="417" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="OFv-a4-dQj">
+                                <rect key="frame" x="20" y="417" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWc-6Y-Uas">
+                                <rect key="frame" x="37" y="451" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q7O-93-dx1">
+                                <rect key="frame" x="118" y="417" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iet-pe-FZc">
+                                <rect key="frame" x="118" y="417" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHB-dZ-zJL">
+                                <rect key="frame" x="135" y="451" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldstar.png" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-jB-0es">
+                                <rect key="frame" x="216" y="417" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_airship.png" translatesAutoresizingMaskIntoConstraints="NO" id="3pi-PW-f1N">
+                                <rect key="frame" x="216" y="417" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-wd-omU">
+                                <rect key="frame" x="233" y="451" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIR-et-6WJ">
+                                <rect key="frame" x="37" y="353" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Endurance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogS-EB-zQU">
+                                <rect key="frame" x="27" y="90" width="83" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Keg Master" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT5-P4-T00">
+                                <rect key="frame" x="125" y="90" width="83" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thursday Everyday" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="MzQ-db-jGL">
+                                <rect key="frame" x="213" y="70" width="90" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="dhA-Aa-AZb"/>
+                    <tabBarItem key="tabBarItem" title="Achievements" image="star.png" id="hhN-eL-QE5"/>
+                    <connections>
+                        <outlet property="achievement1Image" destination="Bvi-qm-TlY" id="DjA-vh-M9D"/>
+                        <outlet property="achievement1Label" destination="H6v-HY-B0V" id="2QV-81-QLW"/>
+                        <outlet property="achievement2Image" destination="jue-7F-lFC" id="g9Y-Du-s0Y"/>
+                        <outlet property="achievement2Label" destination="uKO-9B-A4q" id="c3K-Fu-Lxl"/>
+                        <outlet property="achievement3Image" destination="8zV-zb-kyb" id="u9Z-9O-hGO"/>
+                        <outlet property="achievement3Label" destination="Owr-oi-jso" id="3rB-1n-Ccu"/>
+                        <outlet property="achievement4Image" destination="9Pz-b8-5jW" id="6Zo-yF-gnh"/>
+                        <outlet property="achievement4Label" destination="nIR-et-6WJ" id="97l-9t-1dj"/>
+                        <outlet property="achievement5Image" destination="dHw-he-inQ" id="ci1-3z-jsh"/>
+                        <outlet property="achievement5Label" destination="OBe-zx-J08" id="PAn-it-zXa"/>
+                        <outlet property="achievement6Image" destination="WBh-jh-2Oh" id="cGa-X6-rZM"/>
+                        <outlet property="achievement6Label" destination="9vh-We-NAX" id="G7R-bk-dpb"/>
+                        <outlet property="achievement7Image" destination="OFv-a4-dQj" id="0rm-3T-lO0"/>
+                        <outlet property="achievement7Label" destination="gWc-6Y-Uas" id="F2K-MX-nQU"/>
+                        <outlet property="achievement8Image" destination="Iet-pe-FZc" id="fce-gO-cvN"/>
+                        <outlet property="achievement8Label" destination="iHB-dZ-zJL" id="GZy-nZ-gf4"/>
+                        <outlet property="achievement9Image" destination="3pi-PW-f1N" id="iGi-Qh-Tl6"/>
+                        <outlet property="achievement9Label" destination="fF9-wd-omU" id="dQy-jS-yON"/>
+                        <outlet property="enduranceImage" destination="xRE-g9-LMc" id="hiN-BT-zfX"/>
+                        <outlet property="enduranceLabel" destination="pKJ-bX-lwT" id="Dhg-3z-RU5"/>
+                        <outlet property="kegMasterImage" destination="gkI-qs-axQ" id="irX-as-fUa"/>
+                        <outlet property="kegMasterLabel" destination="xcD-4W-2MP" id="9Xo-AN-yJV"/>
+                        <outlet property="noMeetingImage" destination="yrz-kc-EK0" id="xcC-ws-M9H"/>
+                        <outlet property="noMeetingLabel" destination="fo3-4g-RwP" id="52N-Ae-UQB"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VYw-Ie-bO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x11-HB-Sl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="1126"/>
+            <point key="canvasLocation" x="611" y="800"/>
         </scene>
-        <!--Goat Dar View Controller - Item-->
+        <!--Goat Dar View Controller - GoatDar-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="GoatDarViewController" sceneMemberID="viewController">
@@ -143,7 +351,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Fj1-yw-PNI"/>
+                    <tabBarItem key="tabBarItem" title="GoatDar" image="849-radar.png" id="Fj1-yw-PNI"/>
                     <navigationItem key="navigationItem" id="tzc-WG-rxr"/>
                     <connections>
                         <outlet property="connected" destination="Gb7-hD-UQa" id="6Ri-EC-JVl"/>
@@ -159,138 +367,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="-175"/>
-        </scene>
-        <!--Collection View Controller - Item-->
-        <scene sceneID="1aN-bX-o5N">
-            <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="wQX-bH-501" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Oh0-pp-m74">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OYM-FV-CKH">
-                            <size key="itemSize" width="100" height="100"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Lmm-jt-LOJ">
-                                <rect key="frame" x="0.0" y="64" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="a8x-a5-2hl">
-                                <rect key="frame" x="110" y="64" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="r5w-i5-QDn">
-                                <rect key="frame" x="220" y="64" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="IUR-F2-b3o">
-                                <rect key="frame" x="0.0" y="174" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nYh-1x-ed0">
-                                <rect key="frame" x="110" y="174" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VGn-BW-B8p">
-                                <rect key="frame" x="220" y="174" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nhZ-qc-dgP">
-                                <rect key="frame" x="0.0" y="284" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="svY-yp-xua">
-                                <rect key="frame" x="110" y="284" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Mf6-Pa-CdD">
-                                <rect key="frame" x="220" y="284" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yne-ke-aQU">
-                                <rect key="frame" x="0.0" y="394" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="OBW-bF-U3Q">
-                                <rect key="frame" x="110" y="394" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="wQX-bH-501" id="90b-9L-RLY"/>
-                            <outlet property="delegate" destination="wQX-bH-501" id="ntH-pN-mLx"/>
-                        </connections>
-                    </collectionView>
-                    <tabBarItem key="tabBarItem" title="Item" id="upD-MZ-TL5"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E9V-wf-LPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="679" y="475"/>
+            <point key="canvasLocation" x="611" y="134"/>
         </scene>
     </scenes>
     <resources>
+        <image name="402628484596.png" width="202" height="300"/>
+        <image name="849-radar.png" width="28" height="28"/>
         <image name="connected.jpeg" width="204" height="204"/>
         <image name="crossout.jpeg" width="204" height="204"/>
         <image name="goatbest.jpeg" width="257" height="196"/>
+        <image name="goatbest.jpeg" width="257" height="196"/>
+        <image name="goatbest.jpeg" width="257" height="196"/>
+        <image name="goatbest.jpeg" width="257" height="196"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="goldstar.png" width="400" height="400"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="img_airship.png" width="246" height="175"/>
+        <image name="man-sitting.png" width="423" height="437"/>
+        <image name="no-meetings.png" width="200" height="200"/>
+        <image name="star.png" width="28" height="26"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

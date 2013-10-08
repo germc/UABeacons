@@ -14,8 +14,6 @@
        
         _beaconRegions = [self buildBeaconsDataFromPlist];
         _regions = [self buildRegionsDataFromPlist];
-        
-        
 //        _supportedProximityUUIDs = @[[[NSUUID alloc] initWithUUIDString:@"5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFD"],
 //                                     [[NSUUID alloc] initWithUUIDString:@"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"],
 //                                      [[NSUUID alloc] initWithUUIDString:@"5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"],
@@ -53,7 +51,12 @@
     for(NSDictionary *beaconDict in self.plistBeaconContentsArray)
     {
         CLBeaconRegion *beaconRegion = [self mapDictionaryToBeacon:beaconDict];
-        [beacons addObject:beaconRegion];
+        if (beaconRegion != nil) {
+              [beacons addObject:beaconRegion];
+        } else {
+            NSLog(@"beaconRegion is nil");
+        }
+     
     }
     return [NSArray arrayWithArray:beacons];
 }
@@ -68,14 +71,19 @@
     for(NSDictionary *regionDict in _plistRegionContentsArray)
     {
         CLRegion *region = [self mapDictionaryToRegion:regionDict];
-        [regions addObject:region];
+        
+        if (region != nil) {
+            [regions addObject:region];
+        } else {
+            NSLog(@"region is nil");
+        }
+        
     }
     return [NSArray arrayWithArray:regions];
 }
 
 - (CLBeaconRegion*)mapDictionaryToBeacon:(NSDictionary*)dictionary {
     NSString *title = [dictionary valueForKey:@"title"];
-    
     NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:[dictionary valueForKey:@"proximityUUID"]] ;
     //CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
     //CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];

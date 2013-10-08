@@ -11,6 +11,7 @@
 #import "UAConfig.h"
 #import "UAPush.h"
 #import "UALocationService.h"
+#import "UABeaconManager.h"
 
 @implementation AppDelegate
 {
@@ -20,7 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-  /*
+    //init UABeaconManager
+    [UABeaconManager shared];
+/*
     //Urban Airship additions START
     // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
     // or set runtime properties here.
@@ -120,8 +123,14 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+	if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+		// Stop normal location updates and start significant location change updates for battery efficiency.
+//		[viewController.locationManager startUpdatingLocation];
+//		[viewController.locationManager startMonitoringSignificantLocationChanges];
+	}
+	else {
+		NSLog(@"Significant location change monitoring is not available.");
+	}
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -133,6 +142,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // If the application is in the foreground, we will notify the user of the region's state via an alert.
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertBody message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
