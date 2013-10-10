@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 David Crow. All rights reserved.
 //
 
-#import "UABeaconManager.h"
+#import "UARegionManager.h"
 
 
-@interface UABeaconManager ()
+@interface UARegionManager ()
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
-@implementation UABeaconManager {
+@implementation UARegionManager {
     
     NSMutableDictionary *_beacons;
     CLLocationManager *_locationManager;
@@ -28,14 +28,14 @@
 
 }
 
-+ (UABeaconManager *)shared
++ (UARegionManager *)shared
 {
     DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
         return [[self alloc] init];
     });
 }
 
--(UABeaconManager *)init{
+-(UARegionManager *)init{
     self = [super init];
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -78,8 +78,11 @@
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"managerDidRangeBeacons"
      object:self];
+    
 
 }
+
+
 
 
 @end

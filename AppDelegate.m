@@ -11,7 +11,7 @@
 #import "UAConfig.h"
 #import "UAPush.h"
 #import "UALocationService.h"
-#import "UABeaconManager.h"
+#import "UARegionManager.h"
 
 @implementation AppDelegate
 {
@@ -22,8 +22,8 @@
 {
     
     //init UABeaconManager
-    [UABeaconManager shared];
-/*
+    [UARegionManager shared];
+
     //Urban Airship additions START
     // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
     // or set runtime properties here.
@@ -49,7 +49,7 @@
    //    [UALocationService airshipLocationServiceEnabled];
    
     //Urban Airship additions END
-*/
+
     
 
     

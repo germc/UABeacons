@@ -21,10 +21,10 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        //Sign up for notifications from ranging
+        //register for ranging beacons notification
         [[NSNotificationCenter defaultCenter]
          addObserver:self
-         selector:@selector(didRangeBeacons)
+         selector:@selector(managerDidRangeBeacons)
          name:@"managerDidRangeBeacons"
          object:nil];
     }
@@ -42,11 +42,13 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+
 }
 
--(void)didRangeBeacons{
-
-   // NSLog(@"rangedBeacons:%@", );
+- (void)managerDidRangeBeacons
+{
+    
 }
 
 - (void)didReceiveMemoryWarning

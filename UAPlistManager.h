@@ -13,5 +13,6 @@
 @property (nonatomic, copy) NSArray *plistRegionContentsArray;
 @property (nonatomic, copy, readonly) NSArray *beaconRegions;
 @property (nonatomic, copy, readonly) NSArray *regions;
+@property (nonatomic, copy, readonly) NSArray *readableBeaconRegions;
 
 @end

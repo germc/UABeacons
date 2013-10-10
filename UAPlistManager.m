@@ -41,6 +41,19 @@
     return [_supportedProximityUUIDs objectAtIndex:0];
 }
 
+-(void)loadReadableBeaconRegions{
+    
+    NSMutableArray *readableBeaconArray = [[NSMutableArray alloc] initWithCapacity:[self.beaconRegions count]];
+    NSString *currentReadableBeacon = [[NSString alloc] init];
+    
+    for (CLBeaconRegion *beaconRegion in self.beaconRegions) {
+        currentReadableBeacon = [NSString stringWithFormat:@"%@ - %@", [beaconRegion identifier], [[beaconRegion proximityUUID] UUIDString]];
+        [readableBeaconArray addObject:currentReadableBeacon];
+    }
+    
+    _readableBeaconRegions = [NSArray arrayWithArray:readableBeaconArray];
+}
+
 - (NSArray*) buildBeaconsDataFromPlist
 {
     

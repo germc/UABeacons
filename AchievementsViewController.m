@@ -18,7 +18,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        //register for ranging beacons notification
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(managerDidRangeBeacons)
+         name:@"managerDidRangeBeacons"
+         object:nil];
     }
     return self;
 }
@@ -26,7 +31,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+}
+
+- (void)managerDidRangeBeacons
+{
+
+}
+
+-(void)achievementCheck
+{
+    NSArray *monitoredRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
+    NSArray *rangedRegions = [NSArray arrayWithArray:[[[UARegionManager shared] rangedRegions] allObjects]];
+    
+    for (CLBeaconRegion *monitoredBeaconRegion in monitoredRegions) {
+       //if a monitored region identifier matches a current ranged region identifier
+        for (CLBeaconRegion *rangedBeaconRegion in rangedRegions) {
+            if ([[monitoredBeaconRegion identifier] isEqualToString:[rangedBeaconRegion identifier]] ) {
+             
+                //increment visit count in visitedRegionsDict 
+                
+            }
+        }
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
