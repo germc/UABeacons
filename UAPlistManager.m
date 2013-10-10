@@ -14,6 +14,8 @@
        
         _beaconRegions = [self buildBeaconsDataFromPlist];
         _regions = [self buildRegionsDataFromPlist];
+        _visitedBeaconRegions = [self buildVisitedRegionsDataFromPlist];
+        
 //        _supportedProximityUUIDs = @[[[NSUUID alloc] initWithUUIDString:@"5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFD"],
 //                                     [[NSUUID alloc] initWithUUIDString:@"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"],
 //                                      [[NSUUID alloc] initWithUUIDString:@"5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"],
@@ -35,6 +37,8 @@
     
     return instance;
 }
+
+
 
 - (NSUUID *)defaultProximityUUID
 {
@@ -74,6 +78,27 @@
     return [NSArray arrayWithArray:beacons];
 }
 
+-(NSArray*)buildVisitedRegionsDataFromPlist
+{
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"VisitedBeaconRegions" ofType:@"plist"];
+    _plistVisitedContentsArray = [NSArray arrayWithContentsOfFile:plistPath];
+    
+    NSMutableArray *visitedRegions = [NSMutableArray array];
+    for(NSDictionary *vistedDict in _plistVisitedContentsArray)
+    {
+        NSDictionary *visited= [self mapDictionaryToVisited:vistedDict];
+        
+        if (visited != nil) {
+            [visitedRegions addObject:visited];
+        } else {
+            NSLog(@"region is nil");
+        }
+        
+    }
+    return [NSArray arrayWithArray:visitedRegions];
+    
+}
+
 - (NSArray*) buildRegionsDataFromPlist
 {
     
@@ -95,6 +120,7 @@
     return [NSArray arrayWithArray:regions];
 }
 
+
 - (CLBeaconRegion*)mapDictionaryToBeacon:(NSDictionary*)dictionary {
     NSString *title = [dictionary valueForKey:@"title"];
     NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:[dictionary valueForKey:@"proximityUUID"]] ;
@@ -102,6 +128,17 @@
     //CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
     
     return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:title];
+}
+
+- (NSDictionary*)mapDictionaryToVisited:(NSDictionary*)dictionary {
+    NSString *title = [dictionary valueForKey:@"title"];
+    NSNumber *visits = [dictionary valueForKey:@"visits"];
+    NSNumber *totalVisitTime = [dictionary valueForKey:@"totalVisitTime"];
+
+    //CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
+    //CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
+    
+    return [[NSDictionary alloc] initWithObjectsAndKeys:title,@"title",visits,@"visits",totalVisitTime,@"totalVisitTime",nil];
 }
 
 - (CLRegion*)mapDictionaryToRegion:(NSDictionary*)dictionary {
