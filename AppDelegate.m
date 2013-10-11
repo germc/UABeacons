@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+ /*
     //init UABeaconManager
     [UARegionManager shared];
 
@@ -49,7 +49,7 @@
    //    [UALocationService airshipLocationServiceEnabled];
    
     //Urban Airship additions END
-
+*/
     
 
     
