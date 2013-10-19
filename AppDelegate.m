@@ -20,10 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
- /*
+
     //init UABeaconManager
     [UARegionManager shared];
-
+ /*
     //Urban Airship additions START
     // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
     // or set runtime properties here.

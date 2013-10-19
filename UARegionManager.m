@@ -82,6 +82,28 @@
 
 }
 
+-(void)updateVistedMetricsForRangedBeacons:(NSArray *)rangedBeacons
+{
+    for (CLBeacon *beacon in rangedBeacons)
+    {
+        //If the current beacon UUID is missing form the visited regions, add it to the visited regions
+        if ([self.visitedBeaconRegions valueForKey:[[beacon proximityUUID] UUIDString]]==nil)
+        {
+            NSLog(@"New beacon region visited!");
+                NSString *title = [[beacon proximityUUID] UUIDString];
+                //initial values
+                NSNumber *visits = [NSNumber numberWithInt:0];
+                NSNumber *totalVisitTime = [NSNumber numberWithInt:0];
+            
+            
+            [[NSDictionary alloc] initWithObjectsAndKeys:title,@"title", visits,@"visits",totalVisitTime,@"totalVisitTime",nil];
+            
+        }
+    }
+
+
+
+}
 
 
 

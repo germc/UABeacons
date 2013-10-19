@@ -3,6 +3,7 @@
 
 @implementation UAPlistManager {
     NSFileManager* manager;
+    NSArray *uuidToTitleKey;
 }
 
 - (id)init
@@ -10,17 +11,9 @@
     self = [super init];
     if(self)
     {
-        // uuidgen should be used to generate UUIDs.
-       
-        _beaconRegions = [self buildBeaconsDataFromPlist];
-        _regions = [self buildRegionsDataFromPlist];
-        self.visitedBeaconRegions = [self buildVisitedRegionsDataFromPlist];
-        
-        
+
         //Initialize plist filed - TODO add file mngr checking
-        
         manager = [NSFileManager defaultManager];
-        
         NSString* plistRegionsPath = [[NSBundle mainBundle] pathForResource:@"Regions" ofType:@"plist"];
         _plistRegionContentsArray = [NSArray arrayWithContentsOfFile:plistRegionsPath];
         
@@ -29,6 +22,9 @@
         
 //        NSString* plistVisitedPath = [[NSBundle mainBundle] pathForResource:@"VisitedBeaconRegions" ofType:@"plist"];
 //        _plistVisitedContentsArray = [NSArray arrayWithContentsOfFile:plistVisitedPath];
+        
+        _beaconRegions = [self buildBeaconsDataFromPlist];
+        _regions = [self buildRegionsDataFromPlist];
         
     }
     
@@ -47,7 +43,6 @@
 }
 
 -(void)saveVisitedBeaconRegionsToPlist:(NSString *) filePath{
-
 //    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
 //    NSData *dataRepresentingSavedArray = [currentDefaults objectForKey:@"savedArray"];
 //    if (dataRepresentingSavedArray != nil)
@@ -78,9 +73,30 @@
     _readableBeaconRegions = [NSArray arrayWithArray:readableBeaconArray];
 }
 
+-(NSString *)identifierForUUID:(NSUUID *) uuid
+{
+    if (self.readableBeaconRegions != nil)
+    {
+        for (NSString *string in self.readableBeaconRegions) {
+            //if string contains - <UUID> then remove this portion so only the identifier remains
+            NSString *uuidPortion = [NSString stringWithFormat:@" - %@", [uuid UUIDString]];
+            if ([string rangeOfString:uuidPortion].location == NSNotFound){
+            NSLog(@"uuid is not in the monitored list (╯°□°)╯︵ ┻━┻");
+                return nil;
+            }
+            else{
+                return [string substringToIndex:[string rangeOfString:uuidPortion].location];
+            }
+        }
+    }
+    
+    NSLog(@"identifer for UUID did not return (╯°□°)╯︵ ┻━┻");
+    return nil;
+}
+
+
 - (NSArray*) buildBeaconsDataFromPlist
 {
-
     NSMutableArray *beacons = [NSMutableArray array];
     for(NSDictionary *beaconDict in self.plistBeaconContentsArray)
     {
@@ -88,31 +104,33 @@
         if (beaconRegion != nil) {
               [beacons addObject:beaconRegion];
         } else {
-            NSLog(@"beaconRegion is nil");
+            NSLog(@"beaconRegion is nil (╯°□°)╯︵ ┻━┻");
         }
      
     }
+    
+//    [self populateVisitedRegionsFromBeaconsData:beacons];
     return [NSArray arrayWithArray:beacons];
 }
 
--(NSArray*)buildVisitedRegionsDataFromPlist
-{
-
-    NSMutableArray *visitedRegions = [NSMutableArray array];
-    for(NSDictionary *beaconDict in self.plistBeaconContentsArray)
-    {
-        NSDictionary *visited= [self mapDictionaryToVisited:beaconDict];
-        
-        if (visited != nil) {
-            [visitedRegions addObject:visited];
-        } else {
-            NSLog(@"region is nil");
-        }
-        
-    }
-    return [NSArray arrayWithArray:visitedRegions];
-    
-}
+//-(NSArray*)populateVisitedRegionsFromBeaconsData:(NSArray *) beaconsData
+//{
+//    NSMutableArray *visitedRegions = [NSMutableArray array];
+//    
+//    for(NSDictionary *beaconDict in beaconsData)
+//    {
+//        NSDictionary *visited = [self mapDictionaryToVisited:beaconDict];
+//        
+//        if (visited != nil) {
+//            [visitedRegions addObject:visited];
+//        } else {
+//            NSLog(@"beacon is nil (╯°□°)╯︵ ┻━┻");
+//        }
+//        
+//    }
+//    return [NSArray arrayWithArray:visitedRegions];
+//    
+//}
 
 - (NSArray*) buildRegionsDataFromPlist
 {
@@ -124,39 +142,25 @@
         if (region != nil) {
             [regions addObject:region];
         } else {
-            NSLog(@"region is nil");
+            NSLog(@"region is nil (╯°□°)╯︵ ┻━┻");
         }
         
     }
     return [NSArray arrayWithArray:regions];
 }
 
-
 - (CLBeaconRegion*)mapDictionaryToBeacon:(NSDictionary*)dictionary {
     NSString *title = [dictionary valueForKey:@"title"];
     NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:[dictionary valueForKey:@"proximityUUID"]] ;
-    //CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
-    //CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
     
     return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:title];
-}
-
-- (NSDictionary*)mapDictionaryToVisited:(NSDictionary*)dictionary {
-    NSString *title = [dictionary valueForKey:@"title"];
-    NSNumber *visits = [dictionary valueForKey:@"visits"];
-    NSNumber *totalVisitTime = [dictionary valueForKey:@"totalVisitTime"];
-
-    //CLBeaconMajorValue major = [[dictionary valueForKey:@"Major"] unsignedShortValue];
-    //CLBeaconMinorValue minor = [[dictionary valueForKey:@"Minor"] unsignedShortValue];
-    
-    return [[NSDictionary alloc] initWithObjectsAndKeys:title,@"title",visits,@"visits",totalVisitTime,@"totalVisitTime",nil];
 }
 
 - (CLRegion*)mapDictionaryToRegion:(NSDictionary*)dictionary {
     NSString *title = [dictionary valueForKey:@"title"];
     
     CLLocationDegrees latitude = [[dictionary valueForKey:@"latitude"] doubleValue];
-    CLLocationDegrees longitude =[[dictionary valueForKey:@"longitude"] doubleValue];
+    CLLocationDegrees longitude = [[dictionary valueForKey:@"longitude"] doubleValue];
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
     
     CLLocationDistance regionRadius = [[dictionary valueForKey:@"radius"] doubleValue];
