@@ -1,5 +1,8 @@
 #import "UAPlistManager.h"
 #import <CoreLocation/Corelocation.h>
+#import <Foundation/Foundation.h>
+
+
 
 @implementation UAPlistManager {
     NSFileManager* manager;
@@ -31,7 +34,7 @@
     return self;
 }
 
-+ (UAPlistManager *)sharedDefaults
++ (UAPlistManager *)shared
 {
     static id instance = nil;
     static dispatch_once_t onceToken;
@@ -40,19 +43,6 @@
     });
     
     return instance;
-}
-
--(void)saveVisitedBeaconRegionsToPlist:(NSString *) filePath{
-//    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
-//    NSData *dataRepresentingSavedArray = [currentDefaults objectForKey:@"savedArray"];
-//    if (dataRepresentingSavedArray != nil)
-//    {
-//        NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
-//        if (oldSavedArray != nil)
-//            objectArray = [[NSMutableArray alloc] initWithArray:oldSavedArray];
-//        else
-//            objectArray = [[NSMutableArray alloc] init];
-//    }
 }
 
 - (NSUUID *)defaultProximityUUID
@@ -75,19 +65,23 @@
 
 -(NSString *)identifierForUUID:(NSUUID *) uuid
 {
+    NSRange uuidRange;
     if (self.readableBeaconRegions != nil)
     {
         for (NSString *string in self.readableBeaconRegions) {
             //if string contains - <UUID> then remove this portion so only the identifier remains
             NSString *uuidPortion = [NSString stringWithFormat:@" - %@", [uuid UUIDString]];
-            if ([string rangeOfString:uuidPortion].location == NSNotFound){
-            NSLog(@"uuid is not in the monitored list (╯°□°)╯︵ ┻━┻");
-                return nil;
-            }
-            else{
+            //NSRange returns a struct, so make sure it isn't nil, TODO:add nil check
+            
+            if (string != nil)
+                uuidRange = [string rangeOfString:[uuid UUIDString]];
+            
+            if (uuidRange.location != NSNotFound){
                 return [string substringToIndex:[string rangeOfString:uuidPortion].location];
             }
         }
+        NSLog(@"uuid is not in the monitored list (╯°□°)╯︵ ┻━┻");
+        return nil;
     }
     
     NSLog(@"identifer for UUID did not return (╯°□°)╯︵ ┻━┻");
@@ -131,6 +125,7 @@
 //    return [NSArray arrayWithArray:visitedRegions];
 //    
 //}
+
 
 - (NSArray*) buildRegionsDataFromPlist
 {

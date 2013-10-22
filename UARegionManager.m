@@ -23,6 +23,8 @@
     NSMutableArray *tagArray;
     CGFloat bleatTime;
     
+    NSMutableDictionary *vistedRegions;
+    
     int goatX;
     int goatY;
 
@@ -41,14 +43,17 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
-    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
+    //this should be initialized from persistent storage at some point
+    vistedRegions = [[NSMutableDictionary alloc] init];
+    
+    for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
     {
         [self.locationManager startRangingBeaconsInRegion:beaconRegion];
         [self.locationManager startMonitoringForRegion:beaconRegion];
         beaconRegion.notifyOnEntry = YES;
         beaconRegion.notifyOnExit = YES;
         beaconRegion.notifyEntryStateOnDisplay = YES;
-
+        
         
     }
     
@@ -57,7 +62,7 @@
 
 -(void)dealloc{
     //when manager is deallocated, stop ranging (might be unecessary cleanup)
-    for (CLBeaconRegion *beaconRegion in [UAPlistManager sharedDefaults].beaconRegions)
+    for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
     {
         [self.locationManager stopRangingBeaconsInRegion:beaconRegion];
         [self.locationManager stopMonitoringForRegion:beaconRegion];
@@ -78,31 +83,50 @@
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"managerDidRangeBeacons"
      object:self];
-    
+
+    [self updateVistedMetricsForRangedBeacons:beacons];
 
 }
 
 -(void)updateVistedMetricsForRangedBeacons:(NSArray *)rangedBeacons
 {
+    //this is required to have the most up to date list for getting identifiers for uuids
+    [[UAPlistManager shared] loadReadableBeaconRegions];
+    
     for (CLBeacon *beacon in rangedBeacons)
     {
-        //If the current beacon UUID is missing form the visited regions, add it to the visited regions
-        if ([self.visitedBeaconRegions valueForKey:[[beacon proximityUUID] UUIDString]]==nil)
-        {
-            NSLog(@"New beacon region visited!");
-                NSString *title = [[beacon proximityUUID] UUIDString];
-                //initial values
-                NSNumber *visits = [NSNumber numberWithInt:0];
-                NSNumber *totalVisitTime = [NSNumber numberWithInt:0];
-            
-            
-            [[NSDictionary alloc] initWithObjectsAndKeys:title,@"title", visits,@"visits",totalVisitTime,@"totalVisitTime",nil];
-            
+        //If the current beacon UUID is missing form the visited regions, make it a dictionary add it to the visited regions
+        
+        int value;
+        NSString *title = [[UAPlistManager shared] identifierForUUID:[beacon proximityUUID]];
+        //initial values
+        NSNumber *visits = [NSNumber numberWithInt:0];
+        NSNumber *totalVisitTime = [NSNumber numberWithInt:0];
+        //each key is appended with title ex. title_visits
+        NSString *visitsKey = [NSString stringWithFormat:@"%@_visits",title];
+        NSString *totalVisitTimeKey = [NSString stringWithFormat:@"%@_totalVisitTime",title];
+        
+        if ([self.visitedBeaconRegions valueForKey:visitsKey]) {
+            value = [visits intValue];
+            visits = [NSNumber numberWithInt:value + 1];
+            [self.visitedBeaconRegions setValue:visits forKey:visitsKey];
         }
+        else{
+            //new beacon region (no such visit key exists)
+            [self.visitedBeaconRegions setValue:visits forKey:visitsKey];
+        }
+        
+        if ([self.visitedBeaconRegions valueForKey:totalVisitTimeKey]) {
+            value = [totalVisitTimeKey intValue];
+            totalVisitTime = [NSNumber numberWithInt:value + 1];
+            [self.visitedBeaconRegions setValue:totalVisitTime forKey:totalVisitTimeKey];
+        }
+        else{
+            //new beacon region (no such visit key exists)
+            [self.visitedBeaconRegions setValue:totalVisitTime forKey:totalVisitTimeKey];
+        }
+
     }
-
-
-
 }
 
 

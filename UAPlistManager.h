@@ -3,7 +3,10 @@
 
 @interface UAPlistManager : NSObject
 
-+ (UAPlistManager *)sharedDefaults;
++ (UAPlistManager *)shared;
+- (NSString *)identifierForUUID:(NSUUID *) uuid;
+-(void)loadReadableBeaconRegions;
+
 
 @property (nonatomic, copy, readonly) NSArray *supportedProximityUUIDs;
 
