@@ -23,7 +23,7 @@
     NSMutableArray *tagArray;
     CGFloat bleatTime;
     
-    NSMutableDictionary *vistedRegions;
+    NSMutableDictionary *visited;
     
     int goatX;
     int goatY;
@@ -44,7 +44,7 @@
     self.locationManager.delegate = self;
     
     //this should be initialized from persistent storage at some point
-    vistedRegions = [[NSMutableDictionary alloc] init];
+   visited = [[NSMutableDictionary alloc] init];
     
     for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
     {
@@ -100,8 +100,8 @@
         int value;
         NSString *title = [[UAPlistManager shared] identifierForUUID:[beacon proximityUUID]];
         //initial values
-        NSNumber *visits = [NSNumber numberWithInt:0];
-        NSNumber *totalVisitTime = [NSNumber numberWithInt:0];
+        NSNumber *visits = [NSNumber numberWithInt:1];
+        NSNumber *totalVisitTime = [NSNumber numberWithInt:1];
         //each key is appended with title ex. title_visits
         NSString *visitsKey = [NSString stringWithFormat:@"%@_visits",title];
         NSString *totalVisitTimeKey = [NSString stringWithFormat:@"%@_totalVisitTime",title];
@@ -109,25 +109,31 @@
         if ([self.visitedBeaconRegions valueForKey:visitsKey]) {
             value = [visits intValue];
             visits = [NSNumber numberWithInt:value + 1];
-            [self.visitedBeaconRegions setValue:visits forKey:visitsKey];
+            [visited setValue:visits forKey:visitsKey];
         }
         else{
             //new beacon region (no such visit key exists)
-            [self.visitedBeaconRegions setValue:visits forKey:visitsKey];
+            [visited setValue:visits forKey:visitsKey];
         }
         
         if ([self.visitedBeaconRegions valueForKey:totalVisitTimeKey]) {
             value = [totalVisitTimeKey intValue];
             totalVisitTime = [NSNumber numberWithInt:value + 1];
-            [self.visitedBeaconRegions setValue:totalVisitTime forKey:totalVisitTimeKey];
+            [visited setValue:totalVisitTime forKey:totalVisitTimeKey];
         }
         else{
             //new beacon region (no such visit key exists)
-            [self.visitedBeaconRegions setValue:totalVisitTime forKey:totalVisitTimeKey];
+            [visited setValue:totalVisitTime forKey:totalVisitTimeKey];
         }
+        
+        //set the read-only property
+        _visitedBeaconRegions = visited;
 
     }
 }
+
+
+
 
 
 
