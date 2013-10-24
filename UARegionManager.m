@@ -48,11 +48,13 @@
     
     for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
     {
-        [self.locationManager startRangingBeaconsInRegion:beaconRegion];
-        [self.locationManager startMonitoringForRegion:beaconRegion];
+        
         beaconRegion.notifyOnEntry = YES;
         beaconRegion.notifyOnExit = YES;
         beaconRegion.notifyEntryStateOnDisplay = YES;
+        [self.locationManager startRangingBeaconsInRegion:beaconRegion];
+        [self.locationManager startMonitoringForRegion:beaconRegion];
+     
         
         
     }

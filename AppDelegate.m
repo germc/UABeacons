@@ -99,11 +99,11 @@
     
     if(state == CLRegionStateInside)
     {
-        notification.alertBody = @"You're inside the region";
+        notification.alertBody = [NSString stringWithFormat:@"You're inside the region %@", region.identifier];
     }
     else if(state == CLRegionStateOutside)
     {
-        notification.alertBody = @"You're outside the region";
+        notification.alertBody = [NSString stringWithFormat:@"You're outside the region %@", region.identifier];
     }
     else
     {

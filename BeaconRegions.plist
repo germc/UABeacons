@@ -56,16 +56,6 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Esperia</string>
-		<key>proximityUUID</key>
-		<string>A3A49D17-3597-447A-9B5E-9D643685C0B4</string>
-		<key>Major</key>
-		<string>1111</string>
-		<key>Minor</key>
-		<string>2222</string>
-	</dict>
-	<dict>
-		<key>title</key>
 		<string>Norge</string>
 		<key>proximityUUID</key>
 		<string>58916DB9-9AB5-4638-93EC-620956B23731</string>
