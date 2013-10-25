@@ -22,7 +22,6 @@
     //NSMutableArray *_rangedRegions;
     NSMutableArray *tagArray;
     CGFloat bleatTime;
-    
     NSMutableDictionary *visited;
     int monitoredRegionCount;
     CBPeripheralManager *peripheralManager;
