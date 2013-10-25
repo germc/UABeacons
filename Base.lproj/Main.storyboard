@@ -31,13 +31,43 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="yrO-i6-FtN"/>
+                        <segue destination="sqm-26-Hpv" kind="relationship" relationship="viewControllers" id="gRa-Fh-hZz"/>
                         <segue destination="p54-Lv-3Do" kind="relationship" relationship="viewControllers" id="9Xt-az-Bpw"/>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="yrO-i6-FtN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zrf-FB-H72" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="145" y="800"/>
+        </scene>
+        <!--Beacon View - Beacons-->
+        <scene sceneID="iVj-qt-2Vc">
+            <objects>
+                <tableViewController id="sqm-26-Hpv" customClass="BeaconView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HdE-HA-gCS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mh8-qV-ArC">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mh8-qV-ArC" id="iMW-FE-g6w">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sqm-26-Hpv" id="jwP-Kz-WlJ"/>
+                            <outlet property="delegate" destination="sqm-26-Hpv" id="f8t-Z8-28b"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Beacons" image="722-location-pin.png" id="jEE-ZD-tye"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E95-he-Lvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="611" y="1458"/>
         </scene>
         <!--Achievements View Controller - Achievements-->
         <scene sceneID="7xW-8h-8Qo">
@@ -372,6 +402,7 @@
     </scenes>
     <resources>
         <image name="402628484596.png" width="202" height="300"/>
+        <image name="722-location-pin.png" width="19" height="28"/>
         <image name="849-radar.png" width="28" height="28"/>
         <image name="connected.jpeg" width="204" height="204"/>
         <image name="crossout.jpeg" width="204" height="204"/>

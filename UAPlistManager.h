@@ -1,5 +1,7 @@
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/Corelocation.h>
+#import <Foundation/Foundation.h>
 
 @interface UAPlistManager : NSObject
 

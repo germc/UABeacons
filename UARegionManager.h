@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 #import "UAPlistManager.h"
 
 #define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
@@ -29,5 +30,6 @@ return _sharedObject; \
 
 
 + (id)shared;
+-(void)updateVistedMetricsForRegionIdentifier:(NSString *) identifier;
 
 @end

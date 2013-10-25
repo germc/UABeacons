@@ -1,6 +1,5 @@
 #import "UAPlistManager.h"
-#import <CoreLocation/Corelocation.h>
-#import <Foundation/Foundation.h>
+
 
 
 
@@ -151,6 +150,7 @@
     //short major = 1111;
     
     //return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID major:major minor:minor identifier:title];
+
     return [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:title];
 }
 

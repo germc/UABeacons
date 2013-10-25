@@ -18,13 +18,14 @@
 @implementation UARegionManager {
     
     NSMutableDictionary *_beacons;
-    CLLocationManager *_locationManager;
+   // CLLocationManager *_locationManager;
     //NSMutableArray *_rangedRegions;
     NSMutableArray *tagArray;
     CGFloat bleatTime;
     
     NSMutableDictionary *visited;
-    
+    int monitoredRegionCount;
+    CBPeripheralManager *peripheralManager;
     int goatX;
     int goatY;
 
@@ -39,24 +40,24 @@
 
 -(UARegionManager *)init{
     self = [super init];
-    
+    monitoredRegionCount = 0;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    
     //this should be initialized from persistent storage at some point
-   visited = [[NSMutableDictionary alloc] init];
+    visited = [[NSMutableDictionary alloc] init];
+
+    
     
     for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
     {
-        
-        beaconRegion.notifyOnEntry = YES;
-        beaconRegion.notifyOnExit = YES;
-        beaconRegion.notifyEntryStateOnDisplay = YES;
-        [self.locationManager startRangingBeaconsInRegion:beaconRegion];
-        [self.locationManager startMonitoringForRegion:beaconRegion];
-     
-        
-        
+        if (beaconRegion != nil) {
+            beaconRegion.notifyOnEntry = YES;
+            beaconRegion.notifyOnExit = NO;
+            //beaconRegion.notifyEntryStateOnDisplay = YES;
+            [self.locationManager startMonitoringForRegion:beaconRegion];
+            [self.locationManager startRangingBeaconsInRegion:beaconRegion];
+            monitoredRegionCount++;
+        }
     }
     
     return self;
@@ -68,8 +69,15 @@
     {
         [self.locationManager stopRangingBeaconsInRegion:beaconRegion];
         [self.locationManager stopMonitoringForRegion:beaconRegion];
+        //reset monitored region count
+        monitoredRegionCount = 0;
 
     }
+}
+
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
@@ -87,6 +95,21 @@
      object:self];
 
     [self updateVistedMetricsForRangedBeacons:beacons];
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    NSLog( @"didEnterRegion" );
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    NSLog(@"didExitRegion");
+}
+
+
+
+-(void)updateVistedMetricsForRegionIdentifier:(NSString *) identifier{
+
 
 }
 
@@ -134,6 +157,32 @@
     }
 }
 
+
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    // A user can transition in or out of a region while the application is not running.
+    // When this happens CoreLocation will launch the application momentarily, call this delegate method
+    // and we will let the user know via a local notification.
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    [[UARegionManager shared] updateVistedMetricsForRegionIdentifier:region.identifier];
+    
+    if(state == CLRegionStateInside)
+    {
+        notification.alertBody = [NSString stringWithFormat:@"You're inside the region %@", region.identifier];
+    }
+    else if(state == CLRegionStateOutside)
+    {
+        notification.alertBody = [NSString stringWithFormat:@"You're outside the region %@", region.identifier];
+    }
+    else
+    {
+        return;
+    }
+    
+    // If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+    // If its not, iOS will display the notification to the user.
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+}
 
 
 

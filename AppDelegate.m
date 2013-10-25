@@ -13,6 +13,7 @@
 #import "UALocationService.h"
 #import "UARegionManager.h"
 
+
 @implementation AppDelegate
 {
     CLLocationManager *_locationManager;
@@ -96,6 +97,7 @@
     // When this happens CoreLocation will launch the application momentarily, call this delegate method
     // and we will let the user know via a local notification.
     UILocalNotification *notification = [[UILocalNotification alloc] init];
+    [[UARegionManager shared] updateVistedMetricsForRegionIdentifier:region.identifier];
     
     if(state == CLRegionStateInside)
     {
@@ -112,7 +114,7 @@
     
     // If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
     // If its not, iOS will display the notification to the user.
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    //[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

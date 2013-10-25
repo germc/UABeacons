@@ -63,14 +63,14 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return [[UARegionManager shared] monitoredBeaconRegions].count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    
+    return [[UARegionManager shared] monitoredBeaconRegions].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,8 +78,19 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSArray *monitoredBeaconRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
+    CLBeaconRegion *currentBeaconRegion = monitoredBeaconRegions[indexPath.section];
+
     
+    // Configure the cell...
+    if (cell == nil)
+	{
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	}
+    
+    cell.textLabel.text = currentBeaconRegion.identifier;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@, Major: %@, Minor: %@", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
     return cell;
 }
 

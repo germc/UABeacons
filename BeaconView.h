@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UARegionManager.h"
 
 @interface BeaconView : UITableViewController
 
