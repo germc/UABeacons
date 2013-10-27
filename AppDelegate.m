@@ -24,37 +24,48 @@
 
     //init UABeaconManager
     [UARegionManager shared];
- /*
-    //Urban Airship additions START
+
+    
+    // This prevents the UA Library from registering with UIApplication by default. This will allow
+    // you to prompt your users at a later time. This gives your app the opportunity to explain the
+    // benefits of push or allows users to turn it on explicitly in a settings screen.
+    //
+    // If you just want everyone to immediately be prompted for push, you can
+    // leave this line out.
+    [UAPush setDefaultPushEnabledValue:NO];
+    
+    // Set log level for debugging config loading (optional)
+    // It will be set to the value in the loaded config upon takeOff
+    [UAirship setLogLevel:UALogLevelTrace];
+    
     // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
     // or set runtime properties here.
     UAConfig *config = [UAConfig defaultConfig];
     
-    // You can also programmatically override the plist values:
+    // You can then programatically override the plist values:
     // config.developmentAppKey = @"YourKey";
     // etc.
     
     // Call takeOff (which creates the UAirship singleton)
     [UAirship takeOff:config];
-//    
-//    // Request a custom set of notification types
+    
+    // Print out the application configuration for debugging (optional)
+    UA_LDEBUG(@"Config:\n%@", [config description]);
+    
+    // Set the icon badge to zero on startup (optional)
+    
+    
+    // Set the notification types required for the app (optional). With the default value of push set to no,
+    // UAPush will record the desired remote notification types, but not register for
+    // push notifications as mentioned above. When push is enabled at a later time, the registration
+    // will occur normally. This value defaults to badge, alert and sound, so it's only necessary to
+    // set it if you want to add or remove types.
     [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
-                                         UIRemoteNotificationTypeAlert |
-                                         UIRemoteNotificationTypeNewsstandContentAvailability);
-    [UAPush setDefaultPushEnabledValue:YES];
-    [[UAPush shared] setPushEnabled:YES];
-   
-   //    [UALocationService locationServicesEnabled];
-   //    [UALocationService locationServiceAuthorized];
-   //    [UALocationService airshipLocationServiceEnabled];
-   
-    //Urban Airship additions END
-*/
+                                         UIRemoteNotificationTypeAlert);
     
-
-    
-    // Override point for customization after application launch.
+    [[UAPush shared] setAutobadgeEnabled:YES];
+    [[UAPush shared] resetBadge];
     return YES;
 }
 
