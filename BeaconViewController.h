@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UARegionManager.h"
 
-@interface BeaconView : UITableViewController
+@interface BeaconViewController : UITableViewController
 
 @end

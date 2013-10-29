@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="145" y="800"/>
         </scene>
-        <!--Beacon View - Beacons-->
+        <!--Beacon View Controller - Beacons-->
         <scene sceneID="iVj-qt-2Vc">
             <objects>
-                <tableViewController id="sqm-26-Hpv" customClass="BeaconView" sceneMemberID="viewController">
+                <tableViewController id="sqm-26-Hpv" customClass="BeaconViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HdE-HA-gCS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

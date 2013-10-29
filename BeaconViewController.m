@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 David Crow. All rights reserved.
 //
 
-#import "BeaconView.h"
+#import "BeaconViewController.h"
 
-@interface BeaconView ()
+@interface BeaconViewController ()
 
 @end
 
-@implementation BeaconView {
+@implementation BeaconViewController {
     NSMutableDictionary *beacons;
     NSMutableArray *rangedRegions;
 }
@@ -63,7 +63,7 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return [[UARegionManager shared] monitoredBeaconRegions].count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

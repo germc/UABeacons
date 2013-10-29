@@ -106,26 +106,6 @@
     return [NSArray arrayWithArray:beacons];
 }
 
-//-(NSArray*)populateVisitedRegionsFromBeaconsData:(NSArray *) beaconsData
-//{
-//    NSMutableArray *visitedRegions = [NSMutableArray array];
-//    
-//    for(NSDictionary *beaconDict in beaconsData)
-//    {
-//        NSDictionary *visited = [self mapDictionaryToVisited:beaconDict];
-//        
-//        if (visited != nil) {
-//            [visitedRegions addObject:visited];
-//        } else {
-//            NSLog(@"beacon is nil (╯°□°)╯︵ ┻━┻");
-//        }
-//        
-//    }
-//    return [NSArray arrayWithArray:visitedRegions];
-//    
-//}
-
-
 - (NSArray*) buildRegionsDataFromPlist
 {
     NSMutableArray *regions = [NSMutableArray array];
