@@ -21,6 +21,7 @@
 
     //init UABeaconManager
     [UARegionManager shared];
+    [UAPlistManager shared];
 
     // This prevents the UA Library from registering with UIApplication by default. This will allow
     // you to prompt your users at a later time. This gives your app the opportunity to explain the
@@ -159,7 +160,7 @@
 {
     // If the application is in the foreground, we will notify the user of the region's state via an alert.
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertBody message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+  //not now, stahp  [alert show];
 }
 
 @end

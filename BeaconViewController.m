@@ -76,12 +76,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSArray *monitoredBeaconRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
-    CLBeaconRegion *currentBeaconRegion = monitoredBeaconRegions[indexPath.section];
+    CLBeaconRegion *currentBeaconRegion = monitoredBeaconRegions[indexPath.row];
 
-    
     // Configure the cell...
     if (cell == nil)
 	{
@@ -90,7 +90,7 @@
 	}
     
     cell.textLabel.text = currentBeaconRegion.identifier;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@, Major: %@, Minor: %@", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
     return cell;
 }
 

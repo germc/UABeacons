@@ -96,7 +96,7 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>iPad</string>
+		<string>Test iPad</string>
 		<key>proximityUUID</key>
 		<string>5A4BCFCE-174E-4BAC-A814-092E77F6B7E5</string>
 		<key>Major</key>
@@ -106,7 +106,7 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>GaryBeacon</string>
+		<string>Keg</string>
 		<key>proximityUUID</key>
 		<string>E2C56DB5-DFFB-48D2-B060-D0F5A71096E0</string>
 		<key>Major</key>

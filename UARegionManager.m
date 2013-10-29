@@ -18,7 +18,7 @@
 @implementation UARegionManager {
     
     NSMutableDictionary *_beacons;
-   // CLLocationManager *_locationManager;
+   //CLLocationManager *_locationManager;
     //NSMutableArray *_rangedRegions;
     NSMutableArray *tagArray;
     CGFloat bleatTime;
@@ -59,6 +59,8 @@
         }
     }
     
+    //set monitored region read-only property with monitored regions
+    _monitoredBeaconRegions = [self.locationManager monitoredRegions];
     return self;
 }
 
@@ -87,7 +89,7 @@
     self.rangedBeacons = beacons;
     self.currentRegion = region;
     //set ivar to init read-only property
-    _monitoredBeaconRegions = [manager rangedRegions];
+    //_monitoredBeaconRegions = [manager rangedRegions];
     
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"managerDidRangeBeacons"
