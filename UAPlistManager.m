@@ -1,11 +1,9 @@
 #import "UAPlistManager.h"
 
-
-
-
 @implementation UAPlistManager {
     NSFileManager* manager;
     NSArray *uuidToTitleKey;
+    NSArray *availableBeaconRegions;
 }
 
 - (id)init
@@ -25,7 +23,7 @@
 //        NSString* plistVisitedPath = [[NSBundle mainBundle] pathForResource:@"VisitedBeaconRegions" ofType:@"plist"];
 //        _plistVisitedContentsArray = [NSArray arrayWithContentsOfFile:plistVisitedPath];
         
-        _beaconRegions = [self buildBeaconsDataFromPlist];
+        availableBeaconRegions = [[NSArray alloc] initWithArray:[self getAvailableBeaconRegions]];
         _regions = [self buildRegionsDataFromPlist];
         
     }
@@ -44,6 +42,10 @@
     return instance;
 }
 
+-(NSArray *)getAvailableBeaconRegions{
+return [self buildBeaconsDataFromPlist];
+}
+
 - (NSUUID *)defaultProximityUUID
 {
     return [_supportedProximityUUIDs objectAtIndex:0];
@@ -51,10 +53,10 @@
 
 -(void)loadReadableBeaconRegions{
     
-    NSMutableArray *readableBeaconArray = [[NSMutableArray alloc] initWithCapacity:[self.beaconRegions count]];
+    NSMutableArray *readableBeaconArray = [[NSMutableArray alloc] initWithCapacity:[availableBeaconRegions count]];
     NSString *currentReadableBeacon = [[NSString alloc] init];
     
-    for (CLBeaconRegion *beaconRegion in self.beaconRegions) {
+    for (CLBeaconRegion *beaconRegion in availableBeaconRegions) {
         currentReadableBeacon = [NSString stringWithFormat:@"%@ - %@", [beaconRegion identifier], [[beaconRegion proximityUUID] UUIDString]];
         [readableBeaconArray addObject:currentReadableBeacon];
     }

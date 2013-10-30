@@ -42,12 +42,13 @@
     monitoredRegionCount = 0;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
+    _availableBeaconRegions = [[UAPlistManager shared] getAvailableBeaconRegions];
     //this should be initialized from persistent storage at some point
     visited = [[NSMutableDictionary alloc] init];
 
     
     
-    for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
+    for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
     {
         if (beaconRegion != nil) {
             beaconRegion.notifyOnEntry = YES;
@@ -64,16 +65,37 @@
     return self;
 }
 
--(void)dealloc{
-    //when manager is deallocated, stop ranging (might be unecessary cleanup)
-    for (CLBeaconRegion *beaconRegion in [UAPlistManager shared].beaconRegions)
+-(void)startMonitoringAllAvailableBeaconRegions{
+    
+    for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
     {
-        [self.locationManager stopRangingBeaconsInRegion:beaconRegion];
-        [self.locationManager stopMonitoringForRegion:beaconRegion];
-        //reset monitored region count
-        monitoredRegionCount = 0;
-
+        if (beaconRegion != nil) {
+            beaconRegion.notifyOnEntry = YES;
+            beaconRegion.notifyOnExit = NO;
+            //beaconRegion.notifyEntryStateOnDisplay = YES;
+            [self.locationManager startMonitoringForRegion:beaconRegion];
+            [self.locationManager startRangingBeaconsInRegion:beaconRegion];
+            monitoredRegionCount++;
+        }
     }
+
+}
+
+-(void)stopMonitoringAllAvailableBeaconRegions{
+    
+    for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
+    {
+        if (beaconRegion != nil) {
+            beaconRegion.notifyOnEntry = YES;
+            beaconRegion.notifyOnExit = NO;
+            
+            [self.locationManager stopRangingBeaconsInRegion:beaconRegion];
+            [self.locationManager stopMonitoringForRegion:beaconRegion];
+            //reset monitored region count
+            monitoredRegionCount = 0;
+        }
+    }
+    
 }
 
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
