@@ -43,7 +43,7 @@
 }
 
 -(NSArray *)getAvailableBeaconRegions{
-return [self buildBeaconsDataFromPlist];
+    return [self buildBeaconsDataFromPlist];
 }
 
 - (NSUUID *)defaultProximityUUID

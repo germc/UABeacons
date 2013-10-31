@@ -56,6 +56,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hmu-6U-G42">
+                                            <rect key="frame" x="278" y="26" width="22" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="722-location-pin.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="location-pin-selected.png"/>
+                                        </button>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GbR-sI-YGB">
                                             <rect key="frame" x="49" y="26" width="34" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -436,6 +444,7 @@
         <image name="goatbest.jpeg" width="257" height="196"/>
         <image name="goldstar.png" width="400" height="400"/>
         <image name="img_airship.png" width="246" height="175"/>
+        <image name="location-pin-selected.png" width="38" height="56"/>
         <image name="man-sitting.png" width="423" height="437"/>
         <image name="no-meetings.png" width="200" height="200"/>
         <image name="star.png" width="28" height="26"/>

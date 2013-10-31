@@ -27,7 +27,6 @@
     CBPeripheralManager *peripheralManager;
     int goatX;
     int goatY;
-
 }
 
 + (UARegionManager *)shared
@@ -48,7 +47,7 @@
 
     
     
-    for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
+    for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
         if (beaconRegion != nil) {
             beaconRegion.notifyOnEntry = YES;
@@ -65,9 +64,26 @@
     return self;
 }
 
+-(CLBeaconRegion *)beaconRegionWithId:(NSString *)identifier{
+/*Allows user to set properties for a beacon region with only an identifier
+ *Uses a passed in CLBeaconRegion properties instead of an options dictionary for simplicity
+ *Properties:
+ *  notifyOnExit, notifyOnEntry, notifyEntryStateOnDisplay
+ */
+    for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
+    {
+        if (beaconRegion.identifier == identifier) {
+            return beaconRegion;
+        }
+    }
+    
+    NSLog(@"No available beacon region exists for that identifier");
+    return nil;
+}
+
 -(void)startMonitoringAllAvailableBeaconRegions{
     
-    for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
+    for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
         if (beaconRegion != nil) {
             beaconRegion.notifyOnEntry = YES;
@@ -93,6 +109,22 @@
             [self.locationManager stopMonitoringForRegion:beaconRegion];
             //reset monitored region count
             monitoredRegionCount = 0;
+        }
+    }
+    
+}
+
+-(void)startMonitoringBeaconRegions{
+    
+    for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
+    {
+        if (beaconRegion != nil) {
+            beaconRegion.notifyOnEntry = YES;
+            beaconRegion.notifyOnExit = NO;
+            //beaconRegion.notifyEntryStateOnDisplay = YES;
+            [self.locationManager startMonitoringForRegion:beaconRegion];
+            [self.locationManager startRangingBeaconsInRegion:beaconRegion];
+            monitoredRegionCount++;
         }
     }
     
