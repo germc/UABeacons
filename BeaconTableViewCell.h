@@ -1,15 +1,14 @@
 //
-//  BeaconView.h
+//  RegionTableViewCell.h
 //  UABeacons
 //
-//  Created by David Crow on 10/3/13.
+//  Created by David Crow on 10/31/13.
 //  Copyright (c) 2013 David Crow. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "UARegionManager.h"
 
-@interface BeaconViewController : UITableViewController
+@interface BeaconTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *beaconIdLabel;
 @property (strong, nonatomic) IBOutlet UILabel *beaconUUIDLabel;

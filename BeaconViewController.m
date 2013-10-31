@@ -7,6 +7,7 @@
 //
 
 #import "BeaconViewController.h"
+#import "BeaconTableViewCell.h"
 
 @interface BeaconViewController ()
 
@@ -75,9 +76,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"BeaconCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    BeaconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSArray *monitoredBeaconRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
     CLBeaconRegion *currentBeaconRegion = monitoredBeaconRegions[indexPath.row];
@@ -85,13 +86,14 @@
     // Configure the cell...
     if (cell == nil)
 	{
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+		cell = [[BeaconTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     
+
     
     
-    cell.textLabel.text = currentBeaconRegion.identifier;
+    cell.beaconIdLabel.text = currentBeaconRegion.identifier;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
     return cell;
 }
