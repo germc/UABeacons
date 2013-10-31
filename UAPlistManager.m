@@ -46,11 +46,6 @@
     return [self buildBeaconsDataFromPlist];
 }
 
-- (NSUUID *)defaultProximityUUID
-{
-    return [_supportedProximityUUIDs objectAtIndex:0];
-}
-
 -(void)loadReadableBeaconRegions{
     
     NSMutableArray *readableBeaconArray = [[NSMutableArray alloc] initWithCapacity:[availableBeaconRegions count]];
