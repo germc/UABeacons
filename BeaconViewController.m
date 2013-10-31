@@ -92,7 +92,6 @@
     
     
     cell.textLabel.text = currentBeaconRegion.identifier;
-    cell.
     cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
     return cell;
 }

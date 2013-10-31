@@ -111,22 +111,6 @@
     
 }
 
--(void)startMonitoringBeaconRegions{
-    
-    for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
-    {
-        if (beaconRegion != nil) {
-            beaconRegion.notifyOnEntry = NO;
-            beaconRegion.notifyOnExit = NO;
-            //beaconRegion.notifyEntryStateOnDisplay = YES;
-            [self.locationManager startMonitoringForRegion:beaconRegion];
-            [self.locationManager startRangingBeaconsInRegion:beaconRegion];
-            monitoredRegionCount++;
-        }
-    }
-    
-}
-
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
     
