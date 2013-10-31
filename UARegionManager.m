@@ -102,9 +102,6 @@
     for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
     {
         if (beaconRegion != nil) {
-            beaconRegion.notifyOnEntry = YES;
-            beaconRegion.notifyOnExit = NO;
-            
             [self.locationManager stopRangingBeaconsInRegion:beaconRegion];
             [self.locationManager stopMonitoringForRegion:beaconRegion];
             //reset monitored region count
@@ -119,7 +116,7 @@
     for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
         if (beaconRegion != nil) {
-            beaconRegion.notifyOnEntry = YES;
+            beaconRegion.notifyOnEntry = NO;
             beaconRegion.notifyOnExit = NO;
             //beaconRegion.notifyEntryStateOnDisplay = YES;
             [self.locationManager startMonitoringForRegion:beaconRegion];
