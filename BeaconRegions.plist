@@ -106,7 +106,7 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Keg</string>
+		<string>iBeacon </string>
 		<key>proximityUUID</key>
 		<string>E2C56DB5-DFFB-48D2-B060-D0F5A71096E0</string>
 		<key>Major</key>
