@@ -86,14 +86,11 @@
     // Configure the cell...
     if (cell == nil)
 	{
-		cell = [[BeaconTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		cell = [[BeaconTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     
-
-    
-    
-    cell.beaconIdLabel.text = currentBeaconRegion.identifier;
+    cell.textLabel.text = currentBeaconRegion.identifier;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
     return cell;
 }
