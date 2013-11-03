@@ -1,33 +1,24 @@
 //
-//  BeaconView.m
+//  BeaconSettingsViewController.m
 //  UABeacons
 //
-//  Created by David Crow on 10/3/13.
+//  Created by David Crow on 11/3/13.
 //  Copyright (c) 2013 David Crow. All rights reserved.
 //
 
-#import "BeaconViewController.h"
-#import "BeaconTableViewCell.h"
+#import "BeaconSettingsViewController.h"
 
-@interface BeaconViewController ()
+@interface BeaconSettingsViewController ()
 
 @end
 
-@implementation BeaconViewController {
-    NSMutableDictionary *beacons;
-    NSMutableArray *rangedRegions;
-}
+@implementation BeaconSettingsViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        //register for ranging beacons notification
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self
-         selector:@selector(managerDidRangeBeacons)
-         name:@"managerDidRangeBeacons"
-         object:nil];
+        // Custom initialization
     }
     return self;
 }
@@ -35,21 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-
-}
-
-- (void)managerDidRangeBeacons
-{
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,48 +42,29 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    
-    return [[UARegionManager shared] monitoredBeaconRegions].count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"BeaconCell";
-    
-    BeaconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    NSArray *monitoredBeaconRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
-    CLBeaconRegion *currentBeaconRegion = monitoredBeaconRegions[indexPath.row];
-
-    // Configure the cell...
-    if (cell == nil)
-	{
-		cell = [[BeaconTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	}
-    
-    cell.textLabel.text = currentBeaconRegion.identifier;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
-    return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    BeaconTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSString *cellText = cell.textLabel.text;
-    [self performSegueWithIdentifier:@"beaconSettings" sender:self];
-    
-    
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//#warning Potentially incomplete method implementation.
+//    // Return the number of sections.
+//    return 0;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//#warning Incomplete method implementation.
+//    // Return the number of rows in the section.
+//    return 0;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *CellIdentifier = @"Cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    
+//    // Configure the cell...
+//    
+//    return cell;
+//}
 
 /*
 // Override to support conditional editing of the table view.
