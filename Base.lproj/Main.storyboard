@@ -43,7 +43,6 @@
         <!--Beacon View Controller - Beacons-->
         <scene sceneID="iVj-qt-2Vc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E95-he-Lvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="sqm-26-Hpv" customClass="BeaconViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="69" sectionHeaderHeight="10" sectionFooterHeight="10" id="HdE-HA-gCS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -92,13 +91,13 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Beacons" image="722-location-pin.png" id="jEE-ZD-tye"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E95-he-Lvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="611" y="1458"/>
         </scene>
         <!--Achievements View Controller - Achievements-->
         <scene sceneID="7xW-8h-8Qo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x11-HB-Sl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="p54-Lv-3Do" customClass="AchievementsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O33-Vn-vnW"/>
@@ -340,6 +339,7 @@
                         <outlet property="noMeetingLabel" destination="fo3-4g-RwP" id="52N-Ae-UQB"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x11-HB-Sl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="611" y="800"/>
         </scene>
@@ -538,31 +538,22 @@
                                             <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
                                         </accessibility>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0B7-ap-b2U">
-                                        <rect key="frame" x="0.0" y="251" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0B7-ap-b2U" id="S6l-6E-Mjm">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esg-Mm-ENL">
-                                                    <rect key="frame" x="20" y="11" width="167" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
-                                        </accessibility>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="3G2-mW-Rt1"/>
+                    <connections>
+                        <outlet property="monitorLabel" destination="hoy-as-X9X" id="ZGw-8p-Ntm"/>
+                        <outlet property="monitorSwitch" destination="hnk-by-tw9" id="h4m-72-ldG"/>
+                        <outlet property="noteEntryLabel" destination="ZPx-i6-pA0" id="8yR-9L-kyH"/>
+                        <outlet property="noteEntryOnDisplayLabel" destination="z44-Jd-swH" id="dsU-gY-xo8"/>
+                        <outlet property="noteEntryOnDisplaySwitch" destination="8Po-Bc-vv6" id="Yan-CP-Qnd"/>
+                        <outlet property="noteEntrySwitch" destination="l3R-si-g4V" id="VER-R7-Pag"/>
+                        <outlet property="noteExitLabel" destination="O0L-V1-Zf7" id="cgH-xW-VOq"/>
+                        <outlet property="noteExitSwitch" destination="CAD-YM-CRq" id="0DM-fG-Ep0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paD-P2-63s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
