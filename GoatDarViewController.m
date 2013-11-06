@@ -106,7 +106,7 @@
     CGFloat cosd = kiPodX / kPadToPodProx;
     CGFloat cosfi = (pow(kPadToPodProx,2) + pow(self.iPodProx,2) - pow(self.iPadProx,2)) / (2*self.iPodProx*kPadToPodProx);
     CGFloat d = acos(cosd);     
-    CGFloat fi = acos(cosfi);   //you will have to find an equivalent in your chosen language
+    CGFloat fi = acos(cosfi);
     //look for a method of inverse cos
     CGFloat theta = fi - d;
     

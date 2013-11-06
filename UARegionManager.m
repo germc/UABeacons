@@ -16,10 +16,7 @@
 @end
 
 @implementation UARegionManager {
-    
     NSMutableDictionary *_beacons;
-   //CLLocationManager *_locationManager;
-    //NSMutableArray *_rangedRegions;
     NSMutableArray *tagArray;
     CGFloat bleatTime;
     NSMutableDictionary *visited;
@@ -44,8 +41,6 @@
     _availableBeaconRegions = [[UAPlistManager shared] getAvailableBeaconRegions];
     //this should be initialized from persistent storage at some point
     visited = [[NSMutableDictionary alloc] init];
-
-    
     
     for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
@@ -64,25 +59,20 @@
     return self;
 }
 
+
+//returns a beacon from the ranged list given a identifier, else emits log and returns nil
 -(CLBeacon *)beaconWithId:(NSString *)identifier{
-    
     CLBeaconRegion *beaconRegion = [self beaconRegionWithId:identifier];
-    
     for (CLBeacon *beacon in self.rangedBeacons){
         if ([[beacon.proximityUUID UUIDString] isEqualToString:[beaconRegion.proximityUUID UUIDString]]) {
             return beacon;
         }
     }
-    NSLog(@"No beacon with specified ID within range!");
+    NSLog(@"No beacon with the specified ID is within range");
     return nil;
 }
-
+//returns a beacon regions from the available regions (all in plist) given and identifier
 -(CLBeaconRegion *)beaconRegionWithId:(NSString *)identifier{
-/*Allows user to set properties for a beacon region with only an identifier
- *Uses a passed in CLBeaconRegion properties instead of an options dictionary for simplicity
- *Properties:
- *  notifyOnExit, notifyOnEntry, notifyEntryStateOnDisplay
- */
     for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
         if ([beaconRegion.identifier isEqualToString:identifier]) {
@@ -90,18 +80,19 @@
         }
     }
     
-    NSLog(@"No available beacon region exists for that identifier");
+    NSLog(@"No available beacon region with the specified ID was included in the available regions list");
     return nil;
 }
 
+//helper method to start monitoring all available beacon regions with no notifications
 -(void)startMonitoringAllAvailableBeaconRegions{
     
     for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
         if (beaconRegion != nil) {
-            beaconRegion.notifyOnEntry = YES;
+            beaconRegion.notifyOnEntry = NO;
             beaconRegion.notifyOnExit = NO;
-            //beaconRegion.notifyEntryStateOnDisplay = YES;
+            beaconRegion.notifyEntryStateOnDisplay = NO;
             [self.locationManager startMonitoringForRegion:beaconRegion];
             [self.locationManager startRangingBeaconsInRegion:beaconRegion];
             monitoredRegionCount++;
@@ -110,6 +101,7 @@
 
 }
 
+//helper method to stop monitoring all available beacon regions
 -(void)stopMonitoringAllAvailableBeaconRegions{
     
     for (CLBeaconRegion *beaconRegion in [[UAPlistManager shared] getAvailableBeaconRegions])
@@ -158,7 +150,6 @@
 
 
 -(void)updateVistedMetricsForRegionIdentifier:(NSString *) identifier{
-
 
 }
 
@@ -232,9 +223,5 @@
     // If its not, iOS will display the notification to the user.
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
-
-
-
-
 
 @end

@@ -20,9 +20,6 @@
         NSString* plistBeaconRegionsPath = [[NSBundle mainBundle] pathForResource:@"BeaconRegions" ofType:@"plist"];
         self.plistBeaconContentsArray = [[NSArray alloc] initWithContentsOfFile:plistBeaconRegionsPath];
         
-//        NSString* plistVisitedPath = [[NSBundle mainBundle] pathForResource:@"VisitedBeaconRegions" ofType:@"plist"];
-//        _plistVisitedContentsArray = [NSArray arrayWithContentsOfFile:plistVisitedPath];
-        
         availableBeaconRegions = [[NSArray alloc] initWithArray:[self getAvailableBeaconRegions]];
         _regions = [self buildRegionsDataFromPlist];
         
