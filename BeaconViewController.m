@@ -17,6 +17,7 @@
     NSMutableDictionary *beacons;
     NSMutableArray *rangedRegions;
     CLBeaconRegion *selectedBeaconRegion;
+    CLBeacon *selectedBeacon;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -88,15 +89,29 @@
     
     NSArray *monitoredBeaconRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
     selectedBeaconRegion = monitoredBeaconRegions[indexPath.row];
-
+    selectedBeacon = [[UARegionManager shared] beaconWithId:selectedBeaconRegion.identifier];
     // Configure the cell...
     if (cell == nil)
 	{
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
 	}
     
     [cell.textLabel setText:selectedBeaconRegion.identifier];
+    
+    //
+    if ([selectedBeacon accuracy]){
+        cell.backgroundColor = [UIColor colorWithRed:0 green:100 blue:55 alpha:.2];
+    
+        [UIView animateWithDuration:1.0 delay:0.f options:UIViewAnimationOptionRepeat
+                         animations:^{
+                             cell.imageView.alpha=0.2f;
+                         } completion:^(BOOL finished){
+                             cell.imageView.alpha=1.f;
+                         }];
+    }
+        
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [selectedBeaconRegion.proximityUUID UUIDString], selectedBeaconRegion.major ? selectedBeaconRegion.major : @"None", selectedBeaconRegion.minor ? selectedBeaconRegion.minor : @"None"];
     
@@ -120,7 +135,7 @@
         // Get reference to the destination view controller
         BeaconSettingsViewController *vc = [segue destinationViewController];
         [vc setBeaconRegion:selectedBeaconRegion];
-       
+        [vc setBeacon:selectedBeacon];
         // Pass any objects to the view controller here, like...
         //[vc setMyObjectHere:object];
     }
