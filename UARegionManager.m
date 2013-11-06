@@ -64,6 +64,19 @@
     return self;
 }
 
+-(CLBeacon *)beaconWithId:(NSString *)identifier{
+    
+    CLBeaconRegion *beaconRegion = [self beaconRegionWithId:identifier];
+    
+    for (CLBeacon *beacon in self.rangedBeacons){
+        if ([[beacon.proximityUUID UUIDString] isEqualToString:[beaconRegion.proximityUUID UUIDString]]) {
+            return beacon;
+        }
+    }
+    NSLog(@"No beacon with specified ID within range!");
+    return nil;
+}
+
 -(CLBeaconRegion *)beaconRegionWithId:(NSString *)identifier{
 /*Allows user to set properties for a beacon region with only an identifier
  *Uses a passed in CLBeaconRegion properties instead of an options dictionary for simplicity

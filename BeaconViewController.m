@@ -65,7 +65,12 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    int sections = 1;
+    if ([[UARegionManager shared] rangedBeacons].count > 0){
+        sections = 2;
+    }
+    
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -92,7 +97,9 @@
 	}
     
     [cell.textLabel setText:selectedBeaconRegion.identifier];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [selectedBeaconRegion.proximityUUID UUIDString], selectedBeaconRegion.major, selectedBeaconRegion.minor];
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [selectedBeaconRegion.proximityUUID UUIDString], selectedBeaconRegion.major ? selectedBeaconRegion.major : @"None", selectedBeaconRegion.minor ? selectedBeaconRegion.minor : @"None"];
+    
     return cell;
 }
 
@@ -102,6 +109,7 @@
     //update selected beacon region
     selectedBeaconRegion = [[UARegionManager shared] beaconRegionWithId:cell.textLabel.text];
     [self performSegueWithIdentifier:@"beaconSettings" sender:self];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
