@@ -72,7 +72,7 @@
  */
     for (CLBeaconRegion *beaconRegion in self.availableBeaconRegions)
     {
-        if (beaconRegion.identifier == identifier) {
+        if ([beaconRegion.identifier isEqualToString:identifier]) {
             return beaconRegion;
         }
     }

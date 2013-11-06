@@ -7,7 +7,7 @@
 //
 
 #import "BeaconViewController.h"
-#import "BeaconTableViewCell.h"
+#import "BeaconSettingsViewController.h"
 
 @interface BeaconViewController ()
 
@@ -16,6 +16,7 @@
 @implementation BeaconViewController {
     NSMutableDictionary *beacons;
     NSMutableArray *rangedRegions;
+    CLBeaconRegion *selectedBeaconRegion;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -78,29 +79,43 @@
 {
     static NSString *CellIdentifier = @"BeaconCell";
     
-    BeaconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSArray *monitoredBeaconRegions = [NSArray arrayWithArray:[[[UARegionManager shared] monitoredBeaconRegions] allObjects]];
-    CLBeaconRegion *currentBeaconRegion = monitoredBeaconRegions[indexPath.row];
+    selectedBeaconRegion = monitoredBeaconRegions[indexPath.row];
 
     // Configure the cell...
     if (cell == nil)
 	{
-		cell = [[BeaconTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     
-    cell.textLabel.text = currentBeaconRegion.identifier;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [currentBeaconRegion.proximityUUID UUIDString], currentBeaconRegion.major, currentBeaconRegion.minor];
+    [cell.textLabel setText:selectedBeaconRegion.identifier];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@\nMajor: %@\nMinor: %@\n", [selectedBeaconRegion.proximityUUID UUIDString], selectedBeaconRegion.major, selectedBeaconRegion.minor];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    BeaconTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSString *cellText = cell.textLabel.text;
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //update selected beacon region
+    selectedBeaconRegion = [[UARegionManager shared] beaconRegionWithId:cell.textLabel.text];
     [self performSegueWithIdentifier:@"beaconSettings" sender:self];
-    
-    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"beaconSettings"])
+    {
+        // Get reference to the destination view controller
+        BeaconSettingsViewController *vc = [segue destinationViewController];
+        [vc setBeaconRegion:selectedBeaconRegion];
+       
+        // Pass any objects to the view controller here, like...
+        //[vc setMyObjectHere:object];
+    }
 }
 
 /*

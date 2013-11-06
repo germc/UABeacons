@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface BeaconSettingsViewController : UITableViewController
+
+@property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) IBOutlet UILabel *monitorLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *monitorSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *noteEntryLabel;
